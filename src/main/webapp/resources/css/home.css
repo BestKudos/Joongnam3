@@ -1,0 +1,147 @@
+@CHARSET "UTF-8";
+/* 초기화 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	border: 0;
+}
+/* 사이드 */
+#index_aside {
+	width: 400px;
+}
+/* 첫번째 탭 */
+input:nth-of-type(1) {
+	display: none;
+}
+
+input:nth-of-type(1) ~div:nth-of-type(1) {
+	display: none;
+}
+
+input:nth-of-type(1) ~div:nth-of-type(3) {
+	display: none;
+}
+
+input:nth-of-type(1):checked ~ div:nth-of-type(1) {
+	display: block;
+}
+/* 두번째 탭 */
+input:nth-of-type(2) {
+	display: none;
+}
+
+input:nth-of-type(2) ~div:nth-of-type(2) {
+	display: none;
+}
+
+input:nth-of-type(2) ~div:nth-of-type(4) {
+	display: none;
+}
+
+input:nth-of-type(2):checked ~ div:nth-of-type(2) {
+	display: block;
+}
+/* 세번째 탭 */
+input:nth-of-type(3) {
+	display: none;
+}
+
+input:nth-of-type(3) ~div:nth-of-type(3) {
+	display: none;
+}
+
+input:nth-of-type(3):checked ~ div:nth-of-type(3) {
+	display: block;
+}
+/* 네번째 탭 */
+input:nth-of-type(4) {
+	display: none;
+}
+
+input:nth-of-type(4) ~div:nth-of-type(4) {
+	display: none;
+}
+
+input:nth-of-type(4):checked ~ div:nth-of-type(4) {
+	display: block;
+}
+
+section.button {
+	overflow: hidden;
+}
+
+section.button>label {
+	display: block;
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	box-sizing: border-box;
+	border: 1px solid black;
+	background: black;
+	color: white;
+}
+
+input:nth-of-type(1):checked ~section.button>label:nth-of-type(1) {
+	background: white;
+	color: black;
+}
+
+input:nth-of-type(2):checked ~section.button>label:nth-of-type(2) {
+	background: white;
+	color: black;
+}
+
+input:nth-of-type(3):checked ~section.button>label:nth-of-type(3) {
+	background: white;
+	color: black;
+}
+
+input:nth-of-type(4):checked ~section.button>label:nth-of-type(4) {
+	background: white;
+	color: black;
+}
+/* 리스트 */
+.item {
+	overflow: hidden;
+	padding: 10px;
+	border: 1px solid black;
+	border-top: none;
+}
+
+.thumbnail {
+	float: left;
+}
+
+.discription {
+	float: left;
+	margin-left: 10px;
+}
+
+.discription>strong {
+	display: block;
+	width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.discription>p {
+	display: block;
+	width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- data source -->
+	<!-- mysql -->
+	<util:properties id="mysqlConfig"
+		location="classpath:config/jdbcMysql.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="#{mysqlConfig['jdbc.driverClass']}" />
+		<property name="url" value="#{mysqlConfig['jdbc.url']}" />
+		<property name="username" value="#{mysqlConfig['jdbc.username']}" />
+		<property name="password" value="#{mysqlConfig['jdbc.password']}" />
+	</bean>
+
+	<!-- SqlSessionFactoryBean : SqlSessionTemplate 객체를 얻는다. -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation">
+			<value>classpath:sql/mysql-config.xml</value>
+		</property>
+		<property name="mapperLocations">
+			<value>classpath:sql/mapper/*.xml</value>
+		</property>
+	</bean>
+
+	<!-- SqlSessionTemplate : MyBatis SQL method 호출 및 관리, 예예처리 담당 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 트랜잭션관리자. -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 트랜잭션과 관련된 작업(트랜잭션시작, 커및, 롤백등) -->
+	<bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<!-- oracle -->
+	<util:properties id="oracleConfig"
+		location="classpath:config/jdbcOracle.properties" />
+	<bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="#{oracleConfig['jdbc.driverClass']}" />
+		<property name="url" value="#{oracleConfig['jdbc.url']}" />
+		<property name="username" value="#{oracleConfig['jdbc.username']}" />
+		<property name="password" value="#{oracleConfig['jdbc.password']}" />
+		<property name="defaultAutoCommit" value="true"/>
+	</bean>
+
+	<!-- SqlSessionFactoryBean : SqlSessionTemplate 객체를 얻는다. -->
+	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource2" />
+		<property name="configLocation">
+			<value>classpath:sql/oracle-config.xml</value>
+		</property>
+		<property name="mapperLocations">
+			<value>classpath:sql/mapper2/*.xml</value>
+		</property>
+	</bean>
+
+	<!-- SqlSessionTemplate : MyBatis SQL method 호출 및 관리, 예예처리 담당 -->
+	<bean id="sqlSession2" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory2" />
+	</bean>
+
+	<!-- 트랜잭션관리자. -->
+	<bean id="transactionManager2"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource2" />
+	</bean>
+
+	<!-- 트랜잭션과 관련된 작업(트랜잭션시작, 커및, 롤백등) -->
+	<bean id="transactionTemplate2"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager2" />
+	</bean>
+</beans>

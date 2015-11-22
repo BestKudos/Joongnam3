@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="iboard">
+	
+	<select id="selectOne" parameterType="java.util.HashMap" resultType="ivo">
+		select * from informationcontent where con_no=#{con_no} AND category_no=#{category_no}
+	</select>
+
+	<select id="list" parameterType="java.util.HashMap" resultType="ivo">
+	<![CDATA[
+		SELECT @rnum:=@rnum+1 num,
+		con_no,m_name,PASSWORD,title,content,update_at,m_no,category_no 
+		FROM (SELECT @rnum:=0) r, informationcontent 
+		WHERE category_no=#{category_no} ORDER BY @rnum DESC LIMIT #{start},#{end}
+	]]>
+	</select>
+
+	<select id="count" parameterType="int" resultType="int">
+		SELECT count(*) FROM informationcontent where category_no=#{category_no}
+	</select>
+
+	<select id="min" parameterType="int" resultType="int">
+		SELECT min(con_no) FROM informationcontent where category_no=#{category_no}
+	</select>
+
+	<select id="max" parameterType="int" resultType="int">
+		SELECT max(con_no) FROM informationcontent where category_no=#{category_no}
+	</select>
+
+	<insert id="insert" parameterType="ivo">
+		insert into informationcontent (m_name,password,title,content,m_no,category_no)
+		values (#{m_name} ,#{password}, #{title}, #{content}, #{m_no}, #{category_no})
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		update informationcontent set 
+			title=#{title},
+			content=#{content}
+		where con_no=#{con_no }
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from informationcontent where con_no=#{con_no}
+	</delete>
+</mapper>

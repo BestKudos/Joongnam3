@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	<!-- 별명 -->
+	<typeAliases>
+		<typeAlias alias="uvo" type="mybatis.vo.UserVo" />
+		<!-- 
+		<typeAlias alias="ivo" type="mybatis.vo.yBoard" />
+		 -->
+	</typeAliases>
+	<!-- 
+	<mappers>
+		<mapper resource="sql/mapper/mapper.xml" />
+	</mappers>
+	 -->
+</configuration>

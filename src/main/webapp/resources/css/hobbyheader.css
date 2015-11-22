@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+* {
+        margin : 0;
+        padding : 0;
+    }
+    li {
+        list-style : none
+    }
+    a{
+        text-decoration : none;
+    }
+    img {
+        border : 0;
+    }
+
+    /* 헤더 */
+    #hobby_header {
+        width : 90%;
+        margin : auto;
+        height : 50px;
+        position : relative;
+    }
+    #hobby_title {
+        position : absolute;
+        left : 30px; bottom : 5px;
+    }
+    #hobby_lnb {
+        position : absolute;
+        left : 300px; bottom : 5px;
+    }
+
+    /* 타이틀 */
+
+    /* 메뉴(하단 nav) */
+    #hobby_lnb > ul {
+        overflow : hidden;
+    }
+    #hobby_lnb > ul > li {
+        float : left;
+    }
+    #hobby_lnb > ul > li > a {
+        display : block;
+        padding : 2px 10px;
+        border : 1px solid black;
+    }
+    #hobby_lnb > ul > li > a:hover {
+        background : black;
+        color : white;
+    }
+    #hobby_lnb > ul > li:first-child > a {
+        border-radius : 10px 0 0 10px;
+    }
+    #hobby_lnb > ul > li:last-child > a {
+        border-radius : 0 10px 10px 0;
+    }
+
+    /* 컨텐츠 */
+    #hobby_content{
+        width: 90%; margin: 0 auto;
+        overflow:hidden;
+    }

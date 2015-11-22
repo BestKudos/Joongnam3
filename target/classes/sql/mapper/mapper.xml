@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	
+	<select id="selectOne" parameterType="int" resultType="vo">
+		select * from content where con_no=#{con_no }
+	</select>
+
+	<select id="list" parameterType="java.util.HashMap" resultType="vo">
+	<![CDATA[
+		select * from content order by con_no desc limit #{start},#{end}
+	]]>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(*) FROM content
+	</select>
+
+	<select id="min" parameterType="int" resultType="int">
+		SELECT min(con_no) FROM content
+	</select>
+
+	<select id="max" parameterType="int" resultType="int">
+		SELECT max(con_no) FROM content
+	</select>
+
+	<insert id="insert" parameterType="vo">
+		insert into content (m_name,password,title,content,m_no,category_no)
+		values (#{m_name}, #{password}, #{title}, #{content}, #{m_no}, #{category_no})
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		update content set 
+			title=#{title},
+			content=#{content}
+		where con_no=#{con_no }
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from content where con_no=#{con_no }
+	</delete>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="category">
+	
+	<select id="selectOne" parameterType="int" resultType="cvo">
+		select * from category where category_no=#{category_no }
+	</select>
+	
+	<select id="selectIdx" parameterType="String" resultType="int">
+		select category_no from category where category_name=#{category_name }
+	</select>
+
+	<select id="list" parameterType="java.util.HashMap" resultType="cvo">
+	<![CDATA[
+		select * from category order by category_no desc limit #{start},#{end}
+	]]>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(*) FROM category
+	</select>
+
+	<insert id="insert" parameterType="cvo">
+		insert into category (category_name) values (#{category_name})
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		update category set 
+			category_name=#{category_name}
+		where category_no=#{category_no }
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from category where category_no=#{category_no }
+	</delete>
+</mapper>
